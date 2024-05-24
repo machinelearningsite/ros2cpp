@@ -1,0 +1,6 @@
+name: ros2cpp Pipeline
+on: [push]
+jobs:
+  runs-on: ubuntu-latest
+  steps:
+    - colcon build
