@@ -23,4 +23,26 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(message_filters REQUIRED)
+
+include_directories(include)
+
+install(
+  DIRECTORY include/
+  DESTINATION include/${PROJECT_NAME}
+)
+
+add_executable(ros2cpp_listener src/ros2cpp_listener.cpp)
+ament_target_dependencies(ros2cpp_listener rclcpp std_msgs message_filters)
+
+install(TARGETS
+  ros2cpp_listener
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION lib/${PROJECT_NAME}
+  )
+
 ament_package()
